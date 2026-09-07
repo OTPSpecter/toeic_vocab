@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier de vocabulaire — TOEIC Business English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#152431;
+    --ink-soft:#2c3f4f;
+    --paper:#f6f2e8;
+    --paper-card:#fffdf7;
+    --line:#d8cfb8;
+    --gold:#b8863a;
+    --gold-deep:#8f6526;
+    --sage:#4f7a5b;
+    --sage-bg:#e7efe4;
+    --brick:#a8452f;
+    --brick-bg:#f6e6e0;
+    --shadow: 0 2px 0 rgba(21,36,49,0.06), 0 12px 24px -18px rgba(21,36,49,0.4);
+    --radius: 3px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 700px at 85% -10%, rgba(184,134,58,0.08), transparent 60%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    min-height:100vh;
+    line-height:1.5;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:32px 20px 80px;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  header.top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:14px;
+    margin-bottom:6px;
+  }
+  header.top .brand{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.5rem;
+  }
+  header.top .brand .dot{color:var(--gold);}
+  header.top .ref{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    text-align:right;
+  }
+  .folder-tab{
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--gold-deep);
+    font-weight:600;
+    margin:22px 0 6px;
+  }
+
+  /* ---------- cards / panels ---------- */
+  .panel{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:26px 26px 24px;
+    margin-bottom:22px;
+  }
+  .lead{
+    color:var(--ink-soft);
+    font-size:0.96rem;
+    margin-top:8px;
+  }
+
+  /* mode selection */
+  .mode-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:16px;
+  }
+  @media (max-width:560px){ .mode-grid{grid-template-columns:1fr;} }
+  .mode-card{
+    text-align:left;
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 16px 14px;
+    cursor:pointer;
+    font-family:inherit;
+    transition:border-color .15s ease, transform .1s ease;
+    position:relative;
+  }
+  .mode-card:hover{border-color:var(--gold);}
+  .mode-card.selected{
+    border-color:var(--gold-deep);
+    background:linear-gradient(180deg, rgba(184,134,58,0.09), rgba(184,134,58,0.03));
+  }
+  .mode-card .lvl{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    color:var(--gold-deep);
+    letter-spacing:0.06em;
+  }
+  .mode-card h3{font-size:1.02rem;margin-top:4px;}
+  .mode-card p{margin:6px 0 0;font-size:0.85rem;color:var(--ink-soft);}
+
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:6px 16px;
+    margin-top:12px;
+  }
+  @media (max-width:560px){ .cat-grid{grid-template-columns:1fr;} }
+  .cat-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.9rem;
+    padding:4px 0;
+    border-bottom:1px dotted var(--line);
+  }
+  .cat-row input{accent-color:var(--gold-deep);width:16px;height:16px;}
+  .cat-count{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--ink-soft);}
+
+  .row-between{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .field-label{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-soft);font-weight:600;}
+  .count-btns{display:flex;gap:6px;}
+  .chip{
+    border:1px solid var(--line);
+    background:var(--paper-card);
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:0.85rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .chip.selected{background:var(--ink);color:var(--paper-card);border-color:var(--ink);}
+
+  button.primary{
+    background:var(--ink);
+    color:var(--paper-card);
+    border:none;
+    padding:13px 22px;
+    font-size:0.95rem;
+    font-family:'IBM Plex Sans',sans-serif;
+    font-weight:600;
+    border-radius:var(--radius);
+    cursor:pointer;
+    letter-spacing:0.01em;
+  }
+  button.primary:disabled{opacity:0.4;cursor:not-allowed;}
+  button.primary:hover:not(:disabled){background:var(--gold-deep);}
+  button.ghost{
+    background:transparent;
+    border:1px solid var(--line);
+    padding:12px 20px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    font-family:inherit;
+    font-size:0.9rem;
+    color:var(--ink);
+  }
+  button.ghost:hover{border-color:var(--ink);}
+
+  /* ---------- quiz screen ---------- */
+  .quiz-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .quiz-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--gold-deep);
+    letter-spacing:0.05em;
+  }
+  .progress-track{
+    height:4px;
+    background:var(--line);
+    border-radius:2px;
+    overflow:hidden;
+    margin:10px 0 24px;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--ink);
+    transition:width .25s ease;
+  }
+  .card-stamp{
+    position:absolute;
+    top:18px;
+    right:22px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.68rem;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:3px 8px;
+    border-radius:2px;
+    transform:rotate(2deg);
+  }
+  .question-panel{position:relative;text-align:center;padding:44px 26px 30px;}
+  .q-eyebrow{font-size:0.78rem;color:var(--ink-soft);letter-spacing:0.04em;}
+  .q-word{
+    font-family:'Fraunces',serif;
+    font-size:2rem;
+    font-weight:600;
+    margin:10px 0 4px;
+    line-height:1.25;
+  }
+  .qcm-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:26px;
+  }
+  @media (max-width:560px){ .qcm-grid{grid-template-columns:1fr;} }
+  .qcm-opt{
+    text-align:left;
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    font-size:0.95rem;
+    cursor:pointer;
+    font-family:inherit;
+    color:var(--ink);
+  }
+  .qcm-opt:hover:not(:disabled){border-color:var(--gold);}
+  .qcm-opt.correct{background:var(--sage-bg);border-color:var(--sage);color:#22422c;}
+  .qcm-opt.incorrect{background:var(--brick-bg);border-color:var(--brick);color:#5c2116;}
+  .qcm-opt:disabled{cursor:default;}
+
+  .write-form{margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .write-form input[type=text]{
+    width:100%;
+    max-width:420px;
+    padding:14px 16px;
+    font-size:1.05rem;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    font-family:'IBM Plex Sans',sans-serif;
+    background:var(--paper-card);
+    text-align:center;
+  }
+  .write-form input[type=text]:focus{outline:2px solid var(--gold-deep);outline-offset:1px;}
+  .write-form input.correct{border-color:var(--sage);background:var(--sage-bg);}
+  .write-form input.incorrect{border-color:var(--brick);background:var(--brick-bg);}
+
+  .feedback{
+    min-height:22px;
+    font-size:0.9rem;
+    margin-top:4px;
+  }
+  .feedback.correct{color:var(--sage);}
+  .feedback.incorrect{color:var(--brick);}
+
+  .nav-row{display:flex;justify-content:center;margin-top:22px;}
+
+  /* ---------- results ---------- */
+  .score-big{
+    font-family:'Fraunces',serif;
+    font-size:3.2rem;
+    font-weight:700;
+    text-align:center;
+    margin:6px 0 2px;
+  }
+  .score-sub{text-align:center;color:var(--ink-soft);font-size:0.9rem;margin-bottom:20px;}
+  .mistake-item{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:10px 0;
+    border-bottom:1px dotted var(--line);
+    font-size:0.9rem;
+  }
+  .mistake-item .word{font-weight:600;}
+  .mistake-item .you{color:var(--brick);}
+  .mistake-item .ans{color:var(--sage);}
+
+  .hidden{display:none !important;}
+  .btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+
+  footer.note{
+    text-align:center;
+    font-size:0.75rem;
+    color:var(--ink-soft);
+    margin-top:30px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">Vocabulaire<span class="dot">.</span>TOEIC</div>
+    <div class="ref">DOSSIER N°307 &mdash; BUSINESS ENGLISH</div>
+  </header>
+
+  <!-- ============ SCREEN: SETUP ============ -->
+  <div id="screen-setup">
+
+    <div class="folder-tab">Niveau</div>
+    <div class="panel">
+      <h2>Choisis ton exercice</h2>
+      <p class="lead">Chaque niveau travaille une compétence différente — de la reconnaissance simple à la production écrite dans les deux langues.</p>
+      <div class="mode-grid" id="mode-grid"></div>
+    </div>
+
+    <div class="folder-tab">Sections du vocabulaire</div>
+    <div class="panel">
+      <div class="row-between">
+        <h2 style="font-size:1.1rem;">Catégories</h2>
+        <div style="display:flex;gap:8px;">
+          <button class="chip" id="cat-all">Tout cocher</button>
+          <button class="chip" id="cat-none">Tout décocher</button>
+        </div>
+      </div>
+      <div class="cat-grid" id="cat-grid"></div>
+    </div>
+
+    <div class="folder-tab">Longueur de la session</div>
+    <div class="panel">
+      <div class="row-between" style="margin-bottom:4px;">
+        <span class="field-label">Nombre de questions</span>
+      </div>
+      <div class="count-btns" id="count-btns"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="primary" id="start-btn">Commencer</button>
+    </div>
+    <p id="setup-error" class="lead" style="color:var(--brick);text-align:center;"></p>
+  </div>
+
+  <!-- ============ SCREEN: QUIZ ============ -->
+  <div id="screen-quiz" class="hidden">
+    <div class="quiz-head">
+      <span class="quiz-tag" id="quiz-mode-label"></span>
+      <span class="quiz-tag" id="quiz-progress-label"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+    <div class="panel question-panel">
+      <div class="card-stamp" id="cat-stamp"></div>
+      <div class="q-eyebrow" id="q-instruction"></div>
+      <div class="q-word" id="q-word"></div>
+
+      <div id="qcm-area" class="qcm-grid hidden"></div>
+
+      <div id="write-area" class="write-form hidden">
+        <input type="text" id="write-input" autocomplete="off" placeholder="Écris ta réponse ici…">
+        <button class="primary" id="write-submit">Valider</button>
+      </div>
+
+      <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div class="nav-row">
+      <button class="ghost hidden" id="next-btn">Question suivante →</button>
+    </div>
+  </div>
+
+  <!-- ============ SCREEN: RESULTS ============ -->
+  <div id="screen-results" class="hidden">
+    <div class="folder-tab">Résultat</div>
+    <div class="panel">
+      <div class="score-big" id="score-big"></div>
+      <div class="score-sub" id="score-sub"></div>
+      <div id="mistake-list"></div>
+      <div class="btn-row">
+        <button class="primary" id="retry-btn">Refaire une session</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="note">307 entrées &middot; 11 sections &middot; d'après ta liste de vocabulaire TOEIC</footer>
+</div>
+
+<script>
+/* =========================================================
+   DATA — [ english, french, categoryId ]
+   ========================================================= */
+const CATEGORIES = {
+  1:"Human resources", 2:"Manufacturing", 3:"Premises", 4:"At the office",
+  5:"Shopping, retailing", 6:"Restaurants / Food", 7:"Health",
+  8:"Finance and budgeting", 9:"Traveling and tourism", 10:"Shows", 11:"At the bank"
+};
+
+const VOCAB = [
+[1,"CEO / Chief Executive Officer","PDG / Président Directeur Général"],
+[1,"An executive","Un cadre"],
+[1,"A team leader","Un chef d'équipe"],
+[1,"A floor manager","Un chef de rayon"],
+[1,"A boss","Un patron"],
+[1,"A temp / A temporary worker","Un travailleur intérimaire"],
+[1,"A new hire","Un nouvel employé"],
+[1,"Occupation","Profession"],
+[1,"An employee handbook","Une convention"],
+[1,"Staff attendance","La présence du personnel"],
+[1,"Schedule","Emploi du temps"],
+[1,"To be tardy","Être en retard"],
+[1,"An employee expense voucher","Une note de frais"],
+[1,"Upsizing / Downsizing","Augmentation / réduction des effectifs"],
+[1,"A resume / A cover letter","Un C.V. / Une lettre de candidature"],
+[1,"Credentials / Skills","Références / Compétences"],
+[1,"To lay off / To sack / To fire / To dismiss","Licencier, mettre à la porte"],
+[1,"To be made redundant / Redundancy","Être licencié / Licenciement économique"],
+[1,"A pink slip","Un formulaire de licenciement remis par un patron (US)"],
+[1,"Outplacement","Aide au reclassement après un licenciement"],
+[1,"To resign, to quit, to give in one's notice / Resignation","Démissionner / Une démission"],
+[1,"An employment application form","Un formulaire de demande d'emploi"],
+[1,"A want ad / A job ad","Une offre d'emploi"],
+[1,"To hire / To take on / To recruit","Embaucher"],
+[1,"To be on strike","Être en grève"],
+[1,"Training / A placement, an internship","Une formation / un stage"],
+[1,"A trainee / An intern","Un stagiaire"],
+[1,"Unemployment","Le chômage"],
+[1,"Retirement / To retire","La retraite / Prendre sa retraite"],
+[1,"A pension","Une retraite (argent touché chaque mois)"],
+[1,"Appointment","Nomination / Rendez-vous"],
+[1,"Job-hunting","Recherche d'emploi"],
+[1,"Requirements","Exigences"],
+[1,"Achievement","Réalisation"],
+[1,"Efficient","Efficace, performant"],
+[1,"Salary / Wages","Salaire / Paie"],
+[1,"Compensation","Indemnités"],
+[1,"Vacancies","Postes vacants"],
+[1,"Allowance","Allocation"],
+[1,"Axe","Supprimer en masse"],
+[1,"Bank holiday","Jour férié"],
+[1,"Career","Carrière"],
+[1,"Civil servant","Fonctionnaire"],
+[1,"Corporate culture","Culture d'entreprise"],
+[1,"Disputes","Litiges"],
+[1,"Wage slip","Bulletin de salaire"],
+[1,"Earn one's living","Gagner sa vie"],
+[1,"To be entitled to","Être en droit de"],
+[1,"National Health Service, NHS","Sécurité Sociale"],
+[1,"Perk","Avantage en nature"],
+[1,"Relocation","Délocalisation"],
+[1,"Settlement","Accord"],
+[1,"Sick leave","Congé maladie"],
+[1,"Strike","Grève"],
+[1,"Turnover","Chiffre d'affaires"],
+[1,"Work overtime","Faire des heures supplémentaires"],
+[1,"Work full-time / Work part-time","Travailler à plein temps / à mi-temps"],
+
+[2,"Plant / Factory","Une usine"],
+[2,"To work in shifts","Faire les '3/8'"],
+[2,"A level","Un niveau"],
+[2,"An assembly line","Une chaîne de montage"],
+[2,"To be suitable / To suit","Convenir"],
+[2,"To hamper","Entraver"],
+[2,"Outsourcing","La sous-traitance"],
+[2,"Parts","Des pièces détachées"],
+[2,"To shut down","Fermer"],
+[2,"To revamp","Restructurer"],
+[2,"A supervisor / Foreman","Un contremaître"],
+[2,"To replace","Remplacer"],
+[2,"Industry","Secteur"],
+[2,"Reliable / Unreliable","Fiable / peu fiable"],
+[2,"A helmet","Un casque"],
+
+[3,"A firm","Une entreprise"],
+[3,"A company / A corporation","Une société"],
+[3,"Global","Mondial"],
+[3,"A branch / subsidiary","Une agence / une filiale"],
+[3,"A merger","Une fusion"],
+[3,"Headquarters","Un siège social"],
+[3,"A warehouse","Un entrepôt"],
+[3,"Location","Site, emplacement"],
+[3,"Real estate","L'immobilier"],
+[3,"A utility","Un service public"],
+[3,"A takeover","Une OPA"],
+[3,"To move","Déménager"],
+[3,"A facility / Facilities","Un aménagement / Équipement"],
+[3,"A corridor","Un couloir"],
+[3,"An acquisition / To acquire","Un achat / acheter"],
+[3,"To own","Posséder"],
+[3,"An elevator / A lift","Un ascenseur"],
+[3,"The premises","Le lieu de travail, les locaux"],
+[3,"On the premises","Sur place"],
+[3,"Lease","Bail"],
+[3,"Spacious","Spacieux"],
+[3,"Tenant","Locataire"],
+[3,"Vacant","Libre, inoccupé"],
+[3,"Landlord, landlady","Propriétaire (d'un local loué)"],
+
+[4,"A memo / memorandum","Une note interne"],
+[4,"Office chores","Les tâches au bureau"],
+[4,"Office supplies","Fournitures de bureau"],
+[4,"Stationery","Papier à lettre"],
+[4,"A file / To file","Un dossier / classer les dossiers"],
+[4,"A thumb tack","Une punaise"],
+[4,"A stapler","Une agrafeuse"],
+[4,"A copier","Une photocopieuse"],
+[4,"To sort the mail","Trier le courrier"],
+[4,"Correction fluid","Tip'Ex"],
+[4,"A pencil / pen / highlighter","Un crayon / stylo / feutre"],
+[4,"An eraser, a rubber","Une gomme"],
+[4,"A bulletin board","Un tableau d'affichage"],
+[4,"Petty cash","La caisse"],
+[4,"A chart / graph","Un tableau / graphique"],
+[4,"To be available","Être disponible"],
+[4,"To enclose","Joindre"],
+[4,"To tidy","Ranger"],
+[4,"Clutter","Pagaille"],
+[4,"A shelf (plural: shelves)","Un rayon, une étagère"],
+[4,"A toll-free call","Un appel en numéro vert"],
+[4,"A dial tone","Une tonalité (téléphone)"],
+[4,"A task","Une tâche"],
+[4,"A schedule","Un emploi du temps"],
+[4,"Business hours","Les heures de bureau"],
+[4,"A receptionist","Un standardiste"],
+[4,"A storage room","Un lieu de stockage, un dépôt"],
+[4,"Filing cabinet","Meuble de rangement (à tiroirs)"],
+
+[5,"Aisle","Allée de circulation, rayon"],
+[5,"Bargain","Bonne affaire"],
+[5,"Cashier","Caissier"],
+[5,"Cheap, inexpensive","Bon marché"],
+[5,"Consumer / Consumption","Consommateur / Consommation"],
+[5,"Cut prices","Réduire les prix"],
+[5,"Decrease","Baisser"],
+[5,"Delivery","Livraison"],
+[5,"Discount","Réduction, rabais"],
+[5,"Free","Gratuit"],
+[5,"Goods","Marchandises, produits"],
+[5,"Grocery store","Épicerie"],
+[5,"Increase","Augmenter"],
+[5,"Item","Article"],
+[5,"Mall (US)","Centre commercial"],
+[5,"Market share","Part de marché"],
+[5,"Purchase","Achat / Acheter"],
+[5,"Queue, stand in line","Faire la queue"],
+[5,"Refund","Rembourser"],
+[5,"Retailer","Détaillant"],
+[5,"Sales","Soldes / ventes"],
+[5,"Sell","Vendre / Se vendre"],
+[5,"Sell out of something","Être à court de qqch"],
+[5,"Sell something for / at £10","Vendre qqch 10 livres"],
+[5,"Shelf","Rayon"],
+[5,"Slash / Undercut prices","Brader, casser les prix"],
+[5,"Wholesaler","Grossiste"],
+[5,"An estimate / A quotation","Un devis"],
+[5,"A sample","Un échantillon"],
+[5,"A warranty / guarantee","Une garantie"],
+[5,"Extra","Supplémentaire"],
+[5,"An order form","Un bon de commande"],
+[5,"A dealer","Un concessionnaire"],
+
+[6,"Appetisers","Les entrées"],
+[6,"All you can eat","À volonté"],
+[6,"A menu","Une carte"],
+[6,"Beverage","Boisson"],
+[6,"A waiter / waitress","Un serveur / une serveuse"],
+[6,"Cook","Cuisiner / un cuisinier"],
+[6,"The check / the bill","L'addition"],
+[6,"A tip","Un pourboire"],
+[6,"A chef","Un chef de cuisine"],
+[6,"Caterer","Un traiteur"],
+[6,"Tap water","L'eau du robinet"],
+[6,"Sparkling water","L'eau pétillante"],
+[6,"Dish","Un plat"],
+[6,"To go on a diet","Se mettre au régime"],
+[6,"Eat out","Manger au restaurant"],
+[6,"Edible","Comestible"],
+[6,"Feed","Nourrir"],
+[6,"Frozen food","Les surgelés"],
+[6,"GM-free","Sans OGM"],
+[6,"GMOs","OGM"],
+[6,"Silverware","Les couverts"],
+[6,"A tablecloth","Une nappe"],
+[6,"Hunger","La faim"],
+[6,"Lunch break","Pause déjeuner"],
+[6,"Main course","Plat principal"],
+[6,"Meal","Repas"],
+[6,"Meat","Viande"],
+[6,"To order","Commander"],
+[6,"Nibble","Grignoter"],
+[6,"Organic","'bio'"],
+[6,"Overweight","En surpoids"],
+[6,"Recipe","Recette"],
+[6,"Starve","Mourir de faim"],
+[6,"Taste","Goûter"],
+[6,"Tasty","Très bon"],
+[6,"Can (US), tin (GB)","Boîte de conserve"],
+
+[7,"Ill / sick","Malade"],
+[7,"A physician / A doctor","Un docteur"],
+[7,"Dental coverage","La couverture dentaire"],
+[7,"A sick day","Un jour de congé maladie"],
+[7,"Lifestyle","Mode de vie"],
+[7,"A fitness center","Une salle de sport"],
+
+[8,"An accountant / Accounting","Un comptable / la comptabilité"],
+[8,"A quarter","Un trimestre"],
+[8,"An electronic funds transfer","Un virement"],
+[8,"An ATM","Un distributeur de billets"],
+[8,"Growth / Decline","Croissance / déclin"],
+[8,"To rise / increase","Augmenter"],
+[8,"To slump / fall / decrease","Baisser, chuter"],
+[8,"A bonus","Une prime"],
+[8,"A figure","Un chiffre"],
+[8,"Turnover","Le chiffre d'affaires"],
+[8,"A rate","Un taux"],
+[8,"To forecast / predict","Prévoir"],
+[8,"Stockholders / stocks","Les actionnaires / actions"],
+[8,"To raise money","Récolter des fonds"],
+[8,"A loss","Une perte"],
+[8,"To go bankrupt / out of business","Faire faillite"],
+[8,"A loan / mortgage","Un prêt"],
+[8,"Payday / payroll / pay slip","Jour de paie / paie de tous les employés / la fiche de paie"],
+[8,"Expenses / costs","Des dépenses / des coûts"],
+[8,"A fee","Un tarif"],
+[8,"To break even","Atteindre le seuil de rentabilité"],
+
+[9,"Luggage / baggage","Les bagages"],
+[9,"A direct flight","Un vol direct"],
+[9,"A connecting flight","Un vol avec correspondance"],
+[9,"A resort","Un village vacances"],
+[9,"A round trip flight","Un vol aller-retour"],
+[9,"A one-way flight","Un vol simple"],
+[9,"A rental car","Une voiture de location"],
+[9,"High season, peak season","Haute saison"],
+[9,"Off season","Basse saison"],
+[9,"A cruise","Une croisière"],
+[9,"The subway, the underground","Le métro"],
+[9,"A fare","Un tarif (billets d'avion, etc.)"],
+[9,"A boarding pass","Une carte d'embarquement"],
+[9,"To check in","S'enregistrer"],
+[9,"A train conductor","Un contrôleur de train"],
+[9,"A flight attendant","Une hôtesse de l'air"],
+[9,"Train tracks","Les rails"],
+[9,"The room rate","Le prix d'une chambre"],
+[9,"Inbound / outbound","En provenance / en partance"],
+[9,"Valid","Valable, en règle"],
+[9,"Aisle","Allée centrale (d'un avion)"],
+[9,"To board","Embarquer"],
+[9,"Smoothly","Sans difficulté, sans incident, comme prévu"],
+[9,"To book","Réserver"],
+[9,"Complimentary","Gratuit, à titre gracieux"],
+[9,"Guest","Client d'un hôtel / invité, convive"],
+[9,"Hike","Randonnée, excursion, marche"],
+[9,"Relax","Se reposer, se détendre"],
+[9,"Scenery","Paysage, vue, décor"],
+[9,"Site","Site, lieu touristique"],
+[9,"Thrill","Sensation forte, frisson, émotion"],
+[9,"To tour / A tour","Visiter, faire du tourisme / Excursion, voyage organisé"],
+[9,"Vacation","Vacances, congé"],
+
+[10,"A performance","Une représentation"],
+[10,"A play","Une pièce de théâtre"],
+[10,"A show","Un spectacle"],
+[10,"Tickets","Des places"],
+[10,"Intermission","Entracte"],
+[10,"A movie","Un film"],
+[10,"The opening (of a film)","La sortie (d'un film)"],
+[10,"A blockbuster","Un film grand public"],
+[10,"A review","Une critique"],
+[10,"A director","Un metteur en scène"],
+[10,"A producer","Un producteur"],
+[10,"A script","Un scénario"],
+[10,"A lead","Un premier rôle"],
+[10,"A supporting role","Un deuxième rôle"],
+[10,"An Oscar / an Academy Award","Un prix, une récompense (équivalent 'César')"],
+[10,"An amusement park","Un parc d'attraction"],
+[10,"A ride","Un manège"],
+[10,"A fair","Une foire"],
+[10,"An exhibit","Une exposition"],
+[10,"A lecture","Une conférence"],
+[10,"A star","Une vedette"],
+[10,"A novel","Un roman"],
+[10,"A novelist","Un romancier"],
+
+[11,"Balance","Solde"],
+[11,"Branch","Agence"],
+[11,"Cash","Encaisser, toucher / espèce, argent liquide"],
+[11,"Currency","Monnaie, devise"],
+[11,"Debt","Dette"],
+[11,"Deposit","Verser, mettre, déposer / versement, acompte"],
+[11,"Interest","Intérêt(s)"],
+[11,"Invest","Placer, investir"],
+[11,"Loan","Prêter / Prêt, emprunt"],
+[11,"Mortgage","Prêt hypothécaire"],
+[11,"Pay back","Rembourser, restituer"],
+[11,"Statement","Relevé de compte"],
+[11,"Teller","Guichetier, caissier"],
+[11,"Withdraw / Withdrawal","Retirer / Un retrait"],
+[11,"ATM","Distributeur de billets"],
+[11,"Bounce a check","Refuser un chèque sans provisions"],
+[11,"Asset","Actif"],
+[11,"Bankruptcy","La faillite"],
+[11,"Bid","Offre"],
+[11,"Bond","Obligation"],
+[11,"Borrow","Emprunter"],
+[11,"To be broke","Être ruiné"],
+[11,"Broker","Courtier"],
+[11,"Liability","Passif ou dette d'une entreprise"],
+[11,"Overdraft","Découvert bancaire"],
+[11,"Profits","Bénéfices"],
+[11,"Receipt","Reçu (pour un achat)"],
+[11,"Savings","Économies"],
+[11,"Stock Exchange","La Bourse"],
+[11,"Stockholder","Actionnaire"],
+[11,"Yield","Taux de rendement d'une action"]
+].map(([cat,en,fr]) => ({cat,en,fr}));
+
+/* =========================================================
+   MODES
+   ========================================================= */
+const MODES = [
+  {id:"qcm", lvl:"Niveau 1", title:"QCM", dir:"mixed",
+   desc:"Choisis la bonne traduction parmi 4 propositions."},
+  {id:"write_fr_en", lvl:"Niveau 2", title:"Écrire — FR → EN", dir:"fr_en",
+   desc:"Le mot français s'affiche, écris sa traduction anglaise en toutes lettres."},
+  {id:"write_en_fr", lvl:"Niveau 2", title:"Écrire — EN → FR", dir:"en_fr",
+   desc:"Le mot anglais s'affiche, écris sa traduction française en toutes lettres."},
+  {id:"mixed", lvl:"Niveau 3", title:"Session mixte", dir:"random",
+   desc:"Alterne QCM et écriture, dans les deux sens, pour un entraînement complet."},
+];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+let selectedMode = "qcm";
+let selectedCats = new Set(Object.keys(CATEGORIES).map(Number));
+let questionCount = 15;
+
+let session = [];      // array of prepared question objects
+let currentIndex = 0;
+let score = 0;
+let mistakes = [];
+let answeredCurrent = false;
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+function normalize(str){
+  return str.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/['’]/g,' ')
+    .replace(/[^a-z0-9\s]/g,' ')
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter(w => !['a','an','the','to','un','une','le','la','les','de','du','des','l','qqch'].includes(w))
+    .join(' ');
+}
+function variants(str){
+  return str.split(/[\/,]/).map(s=>s.trim()).filter(Boolean);
+}
+function isCorrectAnswer(userInput, acceptedRaw){
+  const u = normalize(userInput);
+  if(!u) return false;
+  return variants(acceptedRaw).some(v => normalize(v) === u);
+}
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+function pickPrimary(str){
+  // first variant, used for QCM display
+  return variants(str)[0];
+}
+
+/* =========================================================
+   SETUP SCREEN — render
+   ========================================================= */
+const modeGrid = document.getElementById('mode-grid');
+MODES.forEach(m=>{
+  const div = document.createElement('button');
+  div.type="button";
+  div.className = "mode-card" + (m.id===selectedMode ? " selected":"");
+  div.dataset.id = m.id;
+  div.innerHTML = `<div class="lvl">${m.lvl}</div><h3>${m.title}</h3><p>${m.desc}</p>`;
+  div.addEventListener('click', ()=>{
+    selectedMode = m.id;
+    document.querySelectorAll('.mode-card').forEach(c=>c.classList.remove('selected'));
+    div.classList.add('selected');
+  });
+  modeGrid.appendChild(div);
+});
+
+const catCounts = {};
+VOCAB.forEach(v => catCounts[v.cat] = (catCounts[v.cat]||0)+1);
+
+const catGrid = document.getElementById('cat-grid');
+Object.entries(CATEGORIES).forEach(([id,label])=>{
+  id = Number(id);
+  const row = document.createElement('label');
+  row.className = "cat-row";
+  row.innerHTML = `<input type="checkbox" checked data-cat="${id}"> <span>${label}</span> <span class="cat-count">${catCounts[id]}</span>`;
+  catGrid.appendChild(row);
+});
+catGrid.addEventListener('change', (e)=>{
+  if(e.target.matches('input[type=checkbox]')){
+    const id = Number(e.target.dataset.cat);
+    if(e.target.checked) selectedCats.add(id); else selectedCats.delete(id);
+  }
+});
+document.getElementById('cat-all').addEventListener('click', ()=>{
+  catGrid.querySelectorAll('input').forEach(cb=>cb.checked=true);
+  selectedCats = new Set(Object.keys(CATEGORIES).map(Number));
+});
+document.getElementById('cat-none').addEventListener('click', ()=>{
+  catGrid.querySelectorAll('input').forEach(cb=>cb.checked=false);
+  selectedCats = new Set();
+});
+
+const countBtns = document.getElementById('count-btns');
+[10,15,25,50,"Tout"].forEach(n=>{
+  const b = document.createElement('button');
+  b.type="button";
+  b.className = "chip" + (n===questionCount ? " selected":"");
+  b.textContent = n;
+  b.addEventListener('click', ()=>{
+    questionCount = n;
+    countBtns.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
+    b.classList.add('selected');
+  });
+  countBtns.appendChild(b);
+});
+
+document.getElementById('start-btn').addEventListener('click', startSession);
+
+/* =========================================================
+   SESSION BUILD
+   ========================================================= */
+function buildQuestion(entry, forcedDir){
+  let dir = forcedDir;
+  if(dir === "random" || dir === "mixed"){
+    dir = Math.random() < 0.5 ? "fr_en" : "en_fr";
+  }
+  let type = "write";
+  if(selectedMode === "qcm") type = "qcm";
+  else if(selectedMode === "mixed") type = Math.random() < 0.5 ? "qcm" : "write";
+
+  return {entry, dir, type};
+}
+
+function startSession(){
+  const errBox = document.getElementById('setup-error');
+  errBox.textContent = "";
+  const pool = VOCAB.filter(v => selectedCats.has(v.cat));
+  if(pool.length < 4){
+    errBox.textContent = "Sélectionne au moins une catégorie contenant plusieurs mots.";
+    return;
+  }
+  const n = questionCount === "Tout" ? pool.length : Math.min(questionCount, pool.length);
+  const chosen = shuffle(pool).slice(0, n);
+
+  const modeObj = MODES.find(m=>m.id===selectedMode);
+  session = chosen.map(entry => buildQuestion(entry, modeObj.dir));
+  currentIndex = 0;
+  score = 0;
+  mistakes = [];
+
+  document.getElementById('screen-setup').classList.add('hidden');
+  document.getElementById('screen-results').classList.add('hidden');
+  document.getElementById('screen-quiz').classList.remove('hidden');
+  document.getElementById('quiz-mode-label').textContent = modeObj.title.toUpperCase();
+  renderQuestion();
+}
+
+/* =========================================================
+   QUIZ RENDERING
+   ========================================================= */
+function renderQuestion(){
+  answeredCurrent = false;
+  const q = session[currentIndex];
+  const total = session.length;
+  document.getElementById('quiz-progress-label').textContent = `${currentIndex+1} / ${total}`;
+  document.getElementById('progress-fill').style.width = `${(currentIndex/total)*100}%`;
+  document.getElementById('cat-stamp').textContent = CATEGORIES[q.entry.cat];
+  document.getElementById('feedback').textContent = "";
+  document.getElementById('feedback').className = "feedback";
+  document.getElementById('next-btn').classList.add('hidden');
+
+  const qcmArea = document.getElementById('qcm-area');
+  const writeArea = document.getElementById('write-area');
+  qcmArea.innerHTML = "";
+  qcmArea.classList.add('hidden');
+  writeArea.classList.add('hidden');
+  document.getElementById('write-input').value = "";
+  document.getElementById('write-input').className = "";
+  document.getElementById('write-input').disabled = false;
+  document.getElementById('write-submit').disabled = false;
+
+  const promptText = q.dir === "fr_en" ? pickPrimary(q.entry.fr) : pickPrimary(q.entry.en);
+  const instruction = q.dir === "fr_en"
+    ? (q.type==="qcm" ? "Quelle est la traduction anglaise ?" : "Traduis en anglais, en toutes lettres :")
+    : (q.type==="qcm" ? "Quelle est la traduction française ?" : "Traduis en français, en toutes lettres :");
+  document.getElementById('q-instruction').textContent = instruction;
+  document.getElementById('q-word').textContent = promptText;
+
+  if(q.type === "qcm"){
+    qcmArea.classList.remove('hidden');
+    const correctFull = q.dir === "fr_en" ? q.entry.en : q.entry.fr;
+    const correctDisplay = pickPrimary(correctFull);
+
+    const otherPool = VOCAB.filter(v => v !== q.entry);
+    const distractors = shuffle(otherPool).slice(0,3).map(v =>
+      pickPrimary(q.dir === "fr_en" ? v.en : v.fr)
+    );
+    const options = shuffle([correctDisplay, ...distractors]);
+
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.type = "button";
+      btn.className = "qcm-opt";
+      btn.textContent = opt;
+      btn.addEventListener('click', ()=> handleQcmAnswer(btn, opt, correctDisplay, correctFull));
+      qcmArea.appendChild(btn);
+    });
+  } else {
+    writeArea.classList.remove('hidden');
+    document.getElementById('write-input').focus();
+  }
+}
+
+function handleQcmAnswer(btn, chosen, correctDisplay, correctFull){
+  if(answeredCurrent) return;
+  answeredCurrent = true;
+  const isRight = chosen === correctDisplay;
+  document.querySelectorAll('.qcm-opt').forEach(b=>{
+    b.disabled = true;
+    if(b.textContent === correctDisplay) b.classList.add('correct');
+    else if(b === btn && !isRight) b.classList.add('incorrect');
+  });
+  const fb = document.getElementById('feedback');
+  if(isRight){
+    score++;
+    fb.textContent = "Bonne réponse !";
+    fb.className = "feedback correct";
+  } else {
+    fb.textContent = `Raté — la bonne réponse était : ${correctDisplay}`;
+    fb.className = "feedback incorrect";
+    mistakes.push({q: session[currentIndex], you: chosen, correct: correctFull});
+  }
+  document.getElementById('next-btn').classList.remove('hidden');
+}
+
+function handleWriteAnswer(){
+  if(answeredCurrent) return;
+  const q = session[currentIndex];
+  const input = document.getElementById('write-input');
+  const userVal = input.value;
+  const acceptedRaw = q.dir === "fr_en" ? q.entry.en : q.entry.fr;
+  const correctDisplay = pickPrimary(acceptedRaw);
+  const isRight = isCorrectAnswer(userVal, acceptedRaw);
+
+  answeredCurrent = true;
+  input.disabled = true;
+  document.getElementById('write-submit').disabled = true;
+  input.classList.add(isRight ? "correct" : "incorrect");
+
+  const fb = document.getElementById('feedback');
+  if(isRight){
+    score++;
+    fb.textContent = "Bonne réponse !";
+    fb.className = "feedback correct";
+  } else {
+    fb.textContent = `Raté — réponse attendue : ${correctDisplay}`;
+    fb.className = "feedback incorrect";
+    mistakes.push({q, you: userVal || "(vide)", correct: acceptedRaw});
+  }
+  document.getElementById('next-btn').classList.remove('hidden');
+}
+
+document.getElementById('write-submit').addEventListener('click', handleWriteAnswer);
+document.getElementById('write-input').addEventListener('keydown', (e)=>{
+  if(e.key === "Enter"){
+    e.preventDefault();
+    if(!answeredCurrent) handleWriteAnswer();
+    else goNext();
+  }
+});
+document.getElementById('next-btn').addEventListener('click', goNext);
+document.addEventListener('keydown', (e)=>{
+  if(e.key === "Enter" && !document.getElementById('screen-quiz').classList.contains('hidden')){
+    if(answeredCurrent) goNext();
+  }
+});
+
+function goNext(){
+  currentIndex++;
+  if(currentIndex >= session.length){
+    showResults();
+  } else {
+    renderQuestion();
+  }
+}
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
+function showResults(){
+  document.getElementById('screen-quiz').classList.add('hidden');
+  document.getElementById('screen-results').classList.remove('hidden');
+  const total = session.length;
+  document.getElementById('score-big').textContent = `${score} / ${total}`;
+  const pct = Math.round((score/total)*100);
+  let comment;
+  if(pct === 100) comment = "Sans faute — dossier classé.";
+  else if(pct >= 80) comment = "Très bon niveau, encore quelques mots à consolider.";
+  else if(pct >= 50) comment = "Bonne base, continue à réviser les catégories manquées.";
+  else comment = "Encore du travail — reprends les catégories concernées.";
+  document.getElementById('score-sub').textContent = `${pct}% de bonnes réponses. ${comment}`;
+
+  const list = document.getElementById('mistake-list');
+  list.innerHTML = "";
+  if(mistakes.length){
+    const h = document.createElement('h3');
+    h.style.fontSize = "0.95rem";
+    h.style.marginTop = "18px";
+    h.textContent = `À revoir (${mistakes.length})`;
+    list.appendChild(h);
+    mistakes.forEach(m=>{
+      const promptWord = m.q.dir === "fr_en" ? pickPrimary(m.q.entry.fr) : pickPrimary(m.q.entry.en);
+      const row = document.createElement('div');
+      row.className = "mistake-item";
+      row.innerHTML = `<span class="word">${promptWord}</span><span class="you">toi : ${m.you}</span><span class="ans">${pickPrimary(m.correct)}</span>`;
+      list.appendChild(row);
+    });
+  }
+}
+
+document.getElementById('retry-btn').addEventListener('click', ()=>{
+  document.getElementById('screen-results').classList.add('hidden');
+  document.getElementById('screen-setup').classList.remove('hidden');
+});
+</script>
+</body>
+</html>
